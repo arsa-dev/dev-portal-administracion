@@ -2,7 +2,6 @@ vendor
 .env
 node_modules
 
-
 !storage/app/files/test-file.txt
 
 /public/images/custom-logos/*
