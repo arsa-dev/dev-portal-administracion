@@ -43,7 +43,7 @@ jobs:
       with:
         cache: npm
     - run: npm ci
-    - run: npx semantic-release-plus
+    - run: npx semantic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DOCKER_USERNAME: ${{ github.actor }}
