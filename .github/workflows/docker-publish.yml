@@ -41,9 +41,10 @@ jobs:
     - name: Release
       uses: actions/setup-node@v2
       with:
+        node-version: '20'
         cache: npm
     - run: npm ci
-    - run: npx semantic-release-plus
+    - run: npx semantic-release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DOCKER_USERNAME: ${{ github.actor }}
