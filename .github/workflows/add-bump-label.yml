@@ -1,0 +1,15 @@
+name: Add Bump Label
+
+on:
+  pull_request:
+    types: [opened, reopened] # Trigger on PR open or reopen
+
+jobs:
+  add-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add Default Label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: bump:minor
