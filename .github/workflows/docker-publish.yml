@@ -3,7 +3,7 @@ name: Publish Docker image
 on:
   push:
     branches: [ main ]
-    # Trigger this action only on push events to the main branch. 
+    # Trigger this action only on push events to the main branch.
     # You can adjust this to suit your branching strategy.
 
 jobs:
@@ -19,19 +19,36 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Log in to GitHub Container Registry
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        # GITHUB_TOKEN is a built-in secret that's automatically created by GitHub 
-        # to use in your workflow. You can use this token to authenticate in a workflow run.
+    # - name: Log in to GitHub Container Registry
+    #   uses: docker/login-action@v1
+    #   with:
+    #     registry: ghcr.io
+    #     username: ${{ github.actor }}
+    #     password: ${{ secrets.GITHUB_TOKEN }}
+    #     # GITHUB_TOKEN is a built-in secret that's automatically created by GitHub
+    #     # to use in your workflow. You can use this token to authenticate in a workflow run.
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
+    # - name: Build and push Docker image
+    #   uses: docker/build-push-action@v2
+    #   with:
+    #     context: .
+    #     file: ./Dockerfile
+    #     push: true
+    #     tags: ghcr.io/${{ github.repository_owner }}/portal-administracion:latest
+
+    - name: Build
+      uses: actions/checkout@v2
       with:
-        context: .
-        file: ./Dockerfile
-        push: true
-        tags: ghcr.io/${{ github.repository_owner }}/portal-administracion:latest
+        fetch-depth: 0
+    - run: docker build --tag ghcr.io/${{ github.repository_owner }}/portal-administracion:latest .
+    - name: Release
+      uses: actions/setup-node@v2
+      with:
+        cache: npm
+    - run: npm ci
+    - run: npx semantic-release-plus
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DOCKER_USERNAME: ${{ github.actor }}
+        DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
