@@ -37,10 +37,7 @@ jobs:
     #     tags: ghcr.io/${{ github.repository_owner }}/portal-administracion:latest
 
     - name: Build
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - run: docker build --tag ghcr.io/${{ github.repository_owner }}/portal-administracion:latest .
+      run: docker build --tag ghcr.io/${{ github.repository_owner }}/portal-administracion:latest .
     - name: Release
       uses: actions/setup-node@v2
       with:
