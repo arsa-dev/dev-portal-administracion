@@ -47,7 +47,8 @@
               {
                 "name": "ghcr.io/arsa-dev/portal-administracion:latest"
               }
-            ]
+            ],
+            "./release-remoterepo-helm-upgrader.cjs"
         ]
     }
 }

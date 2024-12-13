@@ -1,6 +1,5 @@
 const analyzeCommits = async (pluginConfig, context) => {
-  const { env, logger, options } = context;
-  console.log("options", options);
+  const { logger, options } = context;
   const ownerRepo = options.repositoryUrl?.replace("https://github.com/", "").replace('.git','').split("/") ?? [];
   const owner = ownerRepo[0];
   const repo = ownerRepo[1];
