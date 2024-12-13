@@ -4,12 +4,14 @@ const path = require('path');
 
 const publish = async (pluginConfig, context) => {
   const { logger, env } = context;
+
+  logger.log(env);
+
   const chartPath = env.HELM_CHART_PATH ?? "./portal-objetos-aprendizaje/values.yaml";
   const repoUrl = env.HELM_REPO_URL.replace('$GH_PAT', env.GH_PAT ?? '$GH_PAT'); // Example value:
   const projectValuesTag = env.HELM_PROJECT_VALUES_TAG ?? 'admin';
   const branch = env.RELEASE_BRANCH ?? "develop";
 
-  logger.log(env);
 
   logger.log(`Cloning repository ${env.HELM_REPO_URL}...`);
   const repoDir = path.join(__dirname, 'repo-temp');
