@@ -49,4 +49,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DOCKER_USERNAME: ${{ github.actor }}
         GH_PAT: ${{ secrets.GH_PAT }}
+        HELM_CHART_PATH: ${{ vars.HELM_CHART_PATH }}
+        HELM_REPO_URL: ${{ vars.HELM_REPO_URL }}
+        HELM_PROJECT_VALUES_TAG: ${{ vars.HELM_PROJECT_VALUES_TAG }}
+        RELEASE_BRANCH: ${{ vars.RELEASE_BRANCH }}
 
