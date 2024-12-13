@@ -63,7 +63,7 @@ const publish = async (pluginConfig, context) => {
     });
 
     logger.log("Pushing changes...");
-    // execSync(`git push origin ${branch}`, { cwd: repoDir, stdio: 'inherit' });
+    execSync(`git push origin ${branch}`, { cwd: repoDir, stdio: 'inherit' });
     logger.log("Helm chart updated successfully!");
   } catch (error) {
     logger.error("Error during Helm chart update:", error);
