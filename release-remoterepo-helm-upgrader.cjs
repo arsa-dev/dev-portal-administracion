@@ -5,8 +5,6 @@ const path = require('path');
 const publish = async (pluginConfig, context) => {
   const { logger, env } = context;
 
-  logger.log(env);
-
   const chartPath = env.HELM_CHART_PATH || "./portal-objetos-aprendizaje/values.yaml";
   const repoUrl = env.HELM_REPO_URL.replace('$GH_PAT', env.GH_PAT || '$GH_PAT'); // Example value: https://$GH_PAT@github.com/arsa-dev/helm-repo.git
   const projectValuesTag = env.HELM_PROJECT_VALUES_TAG || 'admin';
@@ -64,6 +62,10 @@ const publish = async (pluginConfig, context) => {
 
     logger.log("Pushing changes...");
     execSync(`git push origin ${branch}`, { cwd: repoDir, stdio: 'inherit' });
+
+    logger.log("Removing temp repo clone...");
+    execSync(`rm -rf ${repoDir}`, { stdio: 'inherit' });
+
     logger.log("Helm chart updated successfully!");
   } catch (error) {
     logger.error("Error during Helm chart update:", error);
