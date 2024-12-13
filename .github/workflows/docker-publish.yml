@@ -36,8 +36,8 @@ jobs:
     #     push: true
     #     tags: ghcr.io/${{ github.repository_owner }}/portal-administracion:latest
 
-    # - name: Build
-    #   run: docker build --tag ${{ github.repository_owner }}/portal-administracion:latest .
+    - name: Build
+      run: docker build --tag ${{ github.repository_owner }}/portal-administracion:latest .
     - name: Release
       uses: actions/setup-node@v2
       with:
