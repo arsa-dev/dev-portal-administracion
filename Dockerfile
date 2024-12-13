@@ -105,6 +105,7 @@ done
 # Define the Laravel log file path
 LOGFILE="/var/www/html/storage/logs/laravel.log"
 touch \$LOGFILE
+chown -R www-data:www-data \$LOGFILE
 
 # Ensure both Apache logs and Laravel logs are streamed to stdout and the log file
 tail -f \$LOGFILE &
