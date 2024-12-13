@@ -7,10 +7,10 @@ const publish = async (pluginConfig, context) => {
 
   logger.log(env);
 
-  const chartPath = env.HELM_CHART_PATH ?? "./portal-objetos-aprendizaje/values.yaml";
-  const repoUrl = env.HELM_REPO_URL.replace('$GH_PAT', env.GH_PAT ?? '$GH_PAT'); // Example value: https://$GH_PAT@github.com/arsa-dev/helm-repo.git
-  const projectValuesTag = env.HELM_PROJECT_VALUES_TAG ?? 'admin';
-  const branch = env.RELEASE_BRANCH ?? "develop";
+  const chartPath = env.HELM_CHART_PATH || "./portal-objetos-aprendizaje/values.yaml";
+  const repoUrl = env.HELM_REPO_URL.replace('$GH_PAT', env.GH_PAT || '$GH_PAT'); // Example value: https://$GH_PAT@github.com/arsa-dev/helm-repo.git
+  const projectValuesTag = env.HELM_PROJECT_VALUES_TAG || 'admin';
+  const branch = env.RELEASE_BRANCH || "develop";
 
   logger.log(`Cloning repository ${env.HELM_REPO_URL}...`);
   const repoDir = path.join(__dirname, 'repo-temp');
